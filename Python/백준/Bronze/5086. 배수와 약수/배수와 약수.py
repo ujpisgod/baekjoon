@@ -2,7 +2,6 @@ t=1
 while t==1:
     a,b=map(int,input().split())
     if a==0 and b==0:
-        t=0
         break
     if a%b==0:
         print("multiple")
