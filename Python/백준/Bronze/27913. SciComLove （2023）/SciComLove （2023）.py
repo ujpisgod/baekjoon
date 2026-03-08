@@ -1,3 +1,5 @@
+import sys
+input = sys.stdin.readline
 n,a=map(int,input().split())
 m=(n+9)//10
 a1=[]
@@ -8,7 +10,9 @@ s=sum(a2)
 for i in range(a):
     c=int(input())-1
     if a2[c]==0:
+        a2[c]+=1
         s+=1
     else:
+        a2[c]-=1
         s-=1
     print(s)
