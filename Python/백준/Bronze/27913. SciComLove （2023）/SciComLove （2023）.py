@@ -1,5 +1,3 @@
-import sys
-input = sys.stdin.readline
 n,a=map(int,input().split())
 m=(n+9)//10
 a1=[]
