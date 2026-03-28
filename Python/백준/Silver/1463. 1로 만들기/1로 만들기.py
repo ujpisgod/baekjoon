@@ -1,21 +1,28 @@
+from collections import deque as dq
 n = int(input())
-
-# dp[i] : 숫자 i를 1로 만드는 최소 연산 횟수
-# n+1칸짜리 빈 기록장을 만듭니다. (0번과 1번 인덱스는 어차피 0입니다)
-dp = [0] * (n + 1)
-
-# 2부터 n까지 순서대로 점화식을 계산하며 올라갑니다.
-for i in range(2, n + 1):
-    # 1. 기본 행동: 1을 빼는 경우 (이전 숫자의 최소 횟수 + 1)
-    dp[i] = dp[i - 1] + 1
-    
-    # 2. 특별 행동 A: 2로 나누어 떨어지면, 방금 구한 값과 비교해서 더 작은 값으로 교체!
-    if i % 2 == 0:
-        dp[i] = min(dp[i], dp[i // 2] + 1)
-        
-    # 3. 특별 행동 B: 3으로 나누어 떨어지면, 역시 더 작은 값으로 교체!
-    if i % 3 == 0:
-        dp[i] = min(dp[i], dp[i // 3] + 1)
-
-# 최종적으로 n번 방에 적힌 '최소 횟수'를 출력합니다.
-print(dp[n])
+visit=[False]*(n+1)
+q=dq()
+q.append(n)
+ll=[0]*(n+1)
+def is1():
+    global t
+    if t<=1:
+        return 1
+    else:
+        return 0
+t=0
+visit[n]=True
+fin=False
+while q:
+    t=q.popleft()
+    k=[(t//3,t%3),(t//2,t%2),(t-1,is1())]
+    for i in k:
+        if i[1]==0 and visit[i[0]]==False:
+            q.append(i[0])
+            visit[i[0]]=True
+            ll[i[0]]=ll[t]+1
+            if i[0]==1:
+                fin=True
+    if fin==True:
+        break
+print(ll[1])
