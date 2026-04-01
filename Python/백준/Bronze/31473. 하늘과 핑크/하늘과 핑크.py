@@ -1,0 +1,6 @@
+n=int(input())
+p=list(map(int,input().split()))
+w=list(map(int,input().split()))
+sp=sum(p)
+sw=sum(w)
+print(sw,sp)
