@@ -1,0 +1,23 @@
+# 1. 메모장 준비 (0~20 인덱스만 쓸 거니까 21칸이면 충분!)
+dp = [[[0] * 21 for _ in range(21)] for _ in range(21)]
+
+def w(a, b, c):
+    # 2. 기저 조건 컷팅 (문제에 적힌 그대로!)
+    if a <= 0 or b <= 0 or c <= 0:
+        return 1
+    if a > 20 or b > 20 or c > 20:
+        return w(20, 20, 20)
+    if dp[a][b][c] != 0:
+        return dp[a][b][c]
+    if a < b and b < c:
+        dp[a][b][c] = w(a, b, c-1) + w(a, b-1, c-1) - w(a, b-1, c)
+        return dp[a][b][c]    
+    else:
+        dp[a][b][c] =w(a-1,b,c)+w(a-1,b-1,c)+w(a-1,b,c-1)-w(a-1,b-1,c-1)
+        return dp[a][b][c]
+while True:
+    a, b, c = map(int, input().split())
+    if a == -1 and b == -1 and c == -1:
+        break
+    ans = w(a, b, c)
+    print(f'w({a}, {b}, {c}) = {ans}')
