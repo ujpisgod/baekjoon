@@ -16,6 +16,7 @@ def solve(player):
             for j in t:
                 sc2+=l[i-1][j-1]
         g=min(g,abs(sc1-sc2))
+        return
     for i in range(player,n+1):
         s.append(i)
         solve(i+1)
